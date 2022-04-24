@@ -8,6 +8,7 @@ import static org.testng.AssertJUnit.*;
 public class GenericCircularBufferTest {
     private GenericCircularBuffer<Integer> buffer = new GenericCircularBuffer<>(2);
 
+    
     @Test
     public void shouldOfferPollableElement()
     {
