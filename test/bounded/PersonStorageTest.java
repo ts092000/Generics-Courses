@@ -1,12 +1,10 @@
 package com.bkitsolution.test.bounded;
 
-import com.bkitsolution.main.bounded.Employee;
-import com.bkitsolution.main.bounded.Partner;
-import com.bkitsolution.main.bounded.PersonLoader;
-import com.bkitsolution.main.bounded.PersonSaver;
+import com.bkitsolution.main.bounded.*;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,7 +14,8 @@ import static java.util.Arrays.asList;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNull;
 
-public class PersonStorageTest {
+public class PersonStorageTest
+{
     private Partner donDraper = new Partner("Don Draper", 89);
     private Partner bertCooper = new Partner("Bert Cooper", 100);
     private Employee peggyOlson = new Employee("Peggy Olson", 65);
@@ -25,15 +24,15 @@ public class PersonStorageTest {
     private PersonSaver saver;
     private PersonLoader loader;
 
-    @Test
+    @org.junit.Test
     public void cannotLoadFromEmptyFile() throws Exception
     {
         PersonLoader loader = new PersonLoader(file);
 
-        assertNull(loader.load());
+        Assert.assertNull(loader.load());
     }
 
-    @Test
+    @org.junit.Test
     public void savesAndLoadsPerson() throws Exception
     {
         PersonSaver saver = new PersonSaver(file);
@@ -42,9 +41,13 @@ public class PersonStorageTest {
         saver.save(donDraper);
 
         assertEquals(donDraper, loader.load());
+
+//        saver.save(peggyOlson);
+//
+//        assertEquals(peggyOlson, loader.load());
     }
 
-    @Test
+    @org.junit.Test
     public void savesAndLoadsTwoPeople() throws Exception
     {
         saver.save(donDraper);
@@ -54,22 +57,26 @@ public class PersonStorageTest {
         assertEquals(peggyOlson, loader.load());
     }
 
-    @Test
+    @org.junit.Test
     public void savesArraysOfPeople() throws Exception
     {
         /*Employee[] employees = new Employee[2];
         Person[] people = employees;*/
+//        List<Person> persons = new ArrayList<>();
+//        persons.add(donDraper);
+//        persons.add(bertCooper);
         Partner[] people = new Partner[2];
         people[0] = donDraper;
         people[1] = bertCooper;
 
+//        saver.saveAll(persons);
         saver.saveAll(people);
 
         assertEquals(donDraper, loader.load());
         assertEquals(bertCooper, loader.load());
     }
 
-    @Test
+    @org.junit.Test
     public void savesListsOfPeople() throws Exception
     {
         List<Partner> people = new ArrayList<>();
@@ -88,11 +95,14 @@ public class PersonStorageTest {
         saver.save(donDraper);
         saver.save(bertCooper);
 
+//        List<Person> people = new ArrayList<>();
         List<Object> people = new ArrayList<>();
         loader.loadAll(people);
 
+//        assertEquals(donDraper, people.get(0));
+//        assertEquals(bertCooper, people.get(1));
 
-        assertEquals(asList(donDraper, bertCooper), people);
+        Assert.assertEquals(asList(donDraper, bertCooper), people);
     }
 
     @Before

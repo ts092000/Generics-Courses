@@ -19,6 +19,8 @@ public class PersonLoader
 
     public Person load() throws ClassNotFoundException
     {
+
+
         try
         {
             final String className = file.readUTF();
